@@ -1,0 +1,10 @@
+DROP TABLE IF EXISTS MonitoraggioEsercizio;
+DROP TABLE IF EXISTS VocePrescrizione;
+DROP TABLE IF EXISTS CatalogoEsercizi;
+DROP TABLE IF EXISTS Svolgimento;
+DROP TABLE IF EXISTS Visita;
+DROP TABLE IF EXISTS Prescrizione;
+DROP TABLE IF EXISTS Prestazione;
+DROP TABLE IF EXISTS Fattura;
+DROP TABLE IF EXISTS Professionista;
+DROP TABLE IF EXISTS Paziente;
