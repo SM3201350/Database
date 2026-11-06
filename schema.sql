@@ -28,7 +28,9 @@ CREATE TABLE IF NOT EXISTS Fattura (
     DataEmissione DATETIME NOT NULL,
     ImportoTotale DECIMAL(8,2) NOT NULL DEFAULT 0.00,
     Stato VARCHAR(20) NOT NULL DEFAULT 'Emessa',
-    MetodoPagamento VARCHAR(30)
+    MetodoPagamento VARCHAR(30),
+    CONSTRAINT CHK_Stato_Fattura
+        CHECK (Stato IN ('In Corso', 'Emessa', 'Saldata', 'Annullata'))
 );
 
 -- Tabella Visita 
@@ -41,12 +43,11 @@ CREATE TABLE IF NOT EXISTS Visita (
     Paziente CHAR(16) NOT NULL,
     Professionista INT NOT NULL,
     Fattura INT NULL,
-    CONSTRAINT FK_Visita_Paziente FOREIGN KEY (Paziente)
-        REFERENCES Paziente(CodiceFiscale) ON UPDATE CASCADE,
-    CONSTRAINT FK_Visita_Professionista FOREIGN KEY (Professionista)
-        REFERENCES Professionista(CodiceProfessionista) ON UPDATE CASCADE,
-    CONSTRAINT FK_Visita_Fattura FOREIGN KEY (Fattura)
-        REFERENCES Fattura(NumeroFattura)
+    CONSTRAINT CHK_Stato_Visita 
+        CHECK (Stato IN ('Prenotata','In Corso', 'Effettuata', 'Annullata')),
+    CONSTRAINT FK_Visita_Paziente FOREIGN KEY (Paziente) REFERENCES Paziente(CodiceFiscale),
+    CONSTRAINT FK_Visita_Professionista FOREIGN KEY (Professionista) REFERENCES Professionista(CodiceProfessionista),
+    CONSTRAINT FK_Visita_Fattura FOREIGN KEY (Fattura) REFERENCES Fattura(NumeroFattura)
 );
 
 -- Tabella Prestazione

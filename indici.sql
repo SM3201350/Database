@@ -17,3 +17,7 @@ ON MonitoraggioEsercizio (DataEsecuzione);
 -- Indice per la ricerca delle prestazioni attive per paziente
 CREATE INDEX idx_Prescrizione_Date
 ON Prescrizione (Paziente, DataInizio, DataFine);
+
+
+CREATE INDEX idx_Visita_Fattura
+ON Visita (Fattura);
